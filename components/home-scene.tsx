@@ -1,44 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   ArcRotateCamera,
+  BoundingBoxGizmo,
+  Color3,
   Effect,
   Engine,
-  MeshBuilder,
+  FreeCamera,
+  HavokPlugin,
   ParticleHelper,
+  PhysicsAggregate,
+  PhysicsShapeType,
   PostProcess,
   Scene,
+  SceneLoader,
+  UniversalCamera,
   Vector3,
 } from "@babylonjs/core";
+import HavokPhysics from "@babylonjs/havok";
 import { useTheme } from "next-themes";
 import { RainFragmentShader } from "./rain.fragment";
+import "@babylonjs/loaders";
+import { Inspector } from "@babylonjs/inspector";
+import { useAsyncEffect } from "@/hooks/useAsyncEffect";
 
 export default function HomeScene() {
   const sceneRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
   const _scene = useRef<Scene | null>(null);
-  useEffect(() => {
+  useAsyncEffect(async () => {
     const container = sceneRef.current;
     if (!container) return;
 
     const engine = new Engine(container, true);
     const scene = new Scene(engine);
     _scene.current = scene;
+    // Inspector.Show(_scene.current, {});
+    const havokInstance = await HavokPhysics();
+    const hk = new HavokPlugin(true, havokInstance);
+    scene.enablePhysics(new Vector3(0, -9.81, 0), hk);
 
-    const camera = new ArcRotateCamera(
-      "Camera",
-      -Math.PI / 2,
-      Math.PI / 3,
-      8,
-      Vector3.Zero(),
-      scene
-    );
+    // 创建一个相机并设置其位置
+    const camera = new UniversalCamera("camera", new Vector3(0, 1, -10), scene);
     camera.setTarget(Vector3.Zero());
+    // 修改相机的步进
+    camera.speed = 0.1;
+    // Attach the camera to the canvas
     camera.attachControl(container, true);
+    camera.checkCollisions = true;
+
     // create environment light
     scene.createDefaultLight();
-
+    scene.collisionsEnabled = true;
     // use particle system to create rain
     ParticleHelper.CreateAsync("rain", scene, true).then((set) => {
       set.systems[0].updateSpeed = 0.01;
@@ -51,8 +65,16 @@ export default function HomeScene() {
         }
       });
     });
-    // create a box
-    MeshBuilder.CreateBox("box", { size: 1 }, scene);
+
+    // load glb model to scene
+    SceneLoader.AppendAsync("/models/", "house.glb", scene).then((scene) => {
+      const house = scene.meshes[0];
+      // 相机看向模型
+      camera.setTarget(house.getAbsolutePosition());
+      house.checkCollisions = true;
+
+      // new PhysicsAggregate(house, PhysicsShapeType.BOX, { mass: 0 }, scene);
+    });
 
     Effect.ShadersStore["rainFragmentShader"] = RainFragmentShader;
 
@@ -77,6 +99,7 @@ export default function HomeScene() {
     window.addEventListener("resize", () => {
       engine.resize();
     });
+
     return () => {
       scene.dispose();
       engine.dispose();
