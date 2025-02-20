@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import PhotoCard from "./PhotoCard";
 

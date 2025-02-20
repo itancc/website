@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/system";
+import { HeroUIProvider } from "@heroui/system";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import Header from "@/views/layout/Header";
 import Main from "@/views/layout/Main";
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
-        <NextUIProvider>
+        <HeroUIProvider>
           <NextThemesProvider
             attribute="class"
             defaultTheme="system"
@@ -30,7 +30,7 @@ export default function RootLayout({
               <Main>{children}</Main>
             </div>
           </NextThemesProvider>
-        </NextUIProvider>
+        </HeroUIProvider>
       </body>
     </html>
   );

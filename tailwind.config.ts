@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { nextui } from "@nextui-org/theme";
+import { heroui } from "@heroui/theme";
 
 const config: Config = {
   content: [
@@ -7,11 +7,11 @@ const config: Config = {
     "./views/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|navbar|link|input|dropdown|popover|card|slider|avatar|tabs|image).js",
+    "./node_modules/@heroui/theme/dist/components/(button|navbar|link|input|dropdown|popover|card|slider|avatar|tabs|image).js",
   ],
   theme: {
     extend: {},
   },
-  plugins: [nextui()],
+  plugins: [heroui()],
 };
 export default config;

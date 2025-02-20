@@ -1,6 +1,6 @@
 "use client";
 
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@heroui/tabs";
 import { SunIcon, MoonIcon, DesktopIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { Key, useCallback } from "react";

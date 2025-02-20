@@ -1,5 +1,5 @@
-import { Link } from "@nextui-org/link";
-import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
+import { Link } from "@heroui/link";
+import { Navbar, NavbarBrand, NavbarContent } from "@heroui/navbar";
 import Logo from "@/components/Logo";
 import Menu from "./Menu";
 import ThemeSwitch from "./ThemeSwitch";

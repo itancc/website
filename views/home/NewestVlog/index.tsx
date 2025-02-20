@@ -1,5 +1,5 @@
 import Piece from "@/components/Piece";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import VideoPlay from "./VideoPlay";
 import SectorLayout from "./SectorLayout";

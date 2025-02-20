@@ -1,7 +1,7 @@
 import Piece from "@/components/Piece";
-import { Button } from "@nextui-org/button";
-import { Card, CardFooter, CardHeader } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
+import { Button } from "@heroui/button";
+import { Card, CardFooter, CardHeader } from "@heroui/card";
+import { Image } from "@heroui/image";
 
 export default function GallyeryPage() {
   const imageList = new Array(20).fill(0).map((_, index) => {

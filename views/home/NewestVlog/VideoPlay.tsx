@@ -1,6 +1,6 @@
-import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
-import { Slider } from "@nextui-org/slider";
+import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
+import { Slider } from "@heroui/slider";
 import Image from "next/image";
 import { PauseIcon, ResumeIcon } from "@radix-ui/react-icons";
 

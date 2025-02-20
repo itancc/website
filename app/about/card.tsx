@@ -1,6 +1,6 @@
-import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Avatar } from "@heroui/avatar";
+import { Button } from "@heroui/button";
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export default function AboutCard({ name = "Zoey Doe" }: { name: string }) {
